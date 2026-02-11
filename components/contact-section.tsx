@@ -69,8 +69,14 @@ export default function ContactSection() {
     const initateEngagement = () => {
         setLoading(true);
         setTimeout(() => {
-            setShowSuccess(true)
-        }, 2000)
+            setShowSuccess(true);
+            setLoading(false);
+            
+            setTimeout(() => {
+                setShowSuccess(false);
+            }, 3000);
+
+        }, 2000);
     }
 
     return (
