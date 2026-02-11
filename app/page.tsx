@@ -5,6 +5,7 @@ import { HeroCarousel } from "@/components/hero-carousel"
 import HighlightsSection from "@/components/highlights-section";
 import { Navbar } from "@/components/navbar"
 import ProcessSection from "@/components/process-section";
+import ScrollProgress from "@/components/scroll-progress";
 import TestimonialsAndInsights from "@/components/testimonials-insights";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
         className="fixed top-0 left-0 h-1 bg-amber-500 z-[100] transition-all duration-300"
         style={{ width: "0%" }}
       /> */}
+      <ScrollProgress />
       <Navbar />
       <HeroCarousel />
       <HighlightsSection />

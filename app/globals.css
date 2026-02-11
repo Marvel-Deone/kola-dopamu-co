@@ -9,3 +9,13 @@ button {
   cursor: pointer !important;
 }
 
+.scrollProgress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: calc(var(--progress) * 100%);
+  background: #F59E0B;
+  z-index: 9999;
+  transform-origin: left;
+}
