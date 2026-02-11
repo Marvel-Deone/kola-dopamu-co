@@ -66,18 +66,34 @@ export default function ContactSection() {
     const [loading, setLoading] = useState<boolean>(false);
     const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
-    const initateEngagement = () => {
+    // const initateEngagement = () => {
+    //     setLoading(true);
+    //     setTimeout(() => {
+    //         setShowSuccess(true);
+    //         setLoading(false);
+
+    //         setTimeout(() => {
+    //             setShowSuccess(false);
+    //         }, 3000);
+
+    //     }, 2000);
+    // }
+
+    const initiateEngagement = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault(); // prevent page refresh
+
         setLoading(true);
+
         setTimeout(() => {
             setShowSuccess(true);
             setLoading(false);
-            
+
             setTimeout(() => {
                 setShowSuccess(false);
             }, 3000);
 
         }, 2000);
-    }
+    };
 
     return (
         <section id="consultation" className="py-24 bg-white relative">
@@ -118,7 +134,7 @@ export default function ContactSection() {
                             </div>
                         </div> :
                         <div className="bg-[#0F172A] p-10 lg:p-14 rounded-[3rem] text-white shadow-2xl min-h-[460px] flex items-center">
-                            <form className="space-y-6 w-full">
+                            <form onSubmit={initiateEngagement} className="space-y-6 w-full">
 
                                 <div className="grid sm:grid-cols-2 gap-6">
                                     <Input label="Full Name" placeholder="e.g. Kola Dopamu" />
@@ -134,7 +150,7 @@ export default function ContactSection() {
                                     placeholder="Provide a summary of the legal matter..."
                                 />
 
-                                <button onClick={initateEngagement} className="w-full py-5 bg-amber-600 rounded-2xl font-black text-lg hover:bg-amber-500 transition shadow-xl">
+                                <button type="submit" disabled={loading}className="w-full py-5 bg-amber-600 rounded-2xl font-black text-lg hover:bg-amber-500 transition shadow-xl">
                                     {loading ? 'Processing...' : ' Initiate Professional Engagement'}
                                 </button>
                             </form>
