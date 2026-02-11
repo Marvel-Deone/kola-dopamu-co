@@ -1,3 +1,7 @@
+"use client"
+
+import { useState } from "react";
+
 const contactItems = [
     {
         label: "Head Office",
@@ -59,6 +63,16 @@ const ContactItem = ({ icon, label, value }: ContactItemProps) => (
 );
 
 export default function ContactSection() {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [showSuccess, setShowSuccess] = useState<boolean>(false);
+
+    const initateEngagement = () => {
+        setLoading(true);
+        setTimeout(() => {
+            setShowSuccess(true)
+        }, 2000)
+    }
+
     return (
         <section id="consultation" className="py-24 bg-white relative">
             <div className="max-w-7xl mx-auto px-8 grid lg:grid-cols-12 gap-16">
@@ -83,28 +97,42 @@ export default function ContactSection() {
 
                 {/* Contact Form */}
                 <div className="lg:col-span-7">
-                    <div className="bg-[#0F172A] p-10 lg:p-14 rounded-[3rem] text-white shadow-2xl min-h-[460px] flex items-center">
-                        <form className="space-y-6 w-full">
-
-                            <div className="grid sm:grid-cols-2 gap-6">
-                                <Input label="Full Name" placeholder="e.g. Kola Dopamu" />
-                                <Input
-                                    label="Email Address"
-                                    type="email"
-                                    placeholder="your@email.com"
-                                />
+                    {showSuccess ?
+                        <div className="bg-[#0F172A] p-10 lg:p-14 rounded-[3rem] text-white shadow-2xl relative overflow-hidden min-h-[460px] flex flex-col justify-center">
+                            <div className="text-center animate-in zoom-in fade-in duration-700">
+                                <div className="w-20 h-20 bg-green-500/10 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-circle-check" aria-hidden="true">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <path d="m9 12 2 2 4-4"></path>
+                                    </svg>
+                                </div>
+                                <h4 className="text-2xl font-black mb-2">Request Received</h4>
+                                <p className="text-slate-400 max-w-xs mx-auto mb-8">Your legal inquiry has been securely logged. An associate will reach out within 24 business hours.</p>
+                                <button onClick={() => setShowSuccess(false)} className="text-amber-500 font-black uppercase text-[10px] tracking-widest hover:text-white transition-colors">Submit Another Brief</button>
                             </div>
+                        </div> :
+                        <div className="bg-[#0F172A] p-10 lg:p-14 rounded-[3rem] text-white shadow-2xl min-h-[460px] flex items-center">
+                            <form className="space-y-6 w-full">
 
-                            <Textarea
-                                label="Brief Summary of Request"
-                                placeholder="Provide a summary of the legal matter..."
-                            />
+                                <div className="grid sm:grid-cols-2 gap-6">
+                                    <Input label="Full Name" placeholder="e.g. Kola Dopamu" />
+                                    <Input
+                                        label="Email Address"
+                                        type="email"
+                                        placeholder="your@email.com"
+                                    />
+                                </div>
 
-                            <button className="w-full py-5 bg-amber-600 rounded-2xl font-black text-lg hover:bg-amber-500 transition shadow-xl">
-                                Initiate Professional Engagement
-                            </button>
-                        </form>
-                    </div>
+                                <Textarea
+                                    label="Brief Summary of Request"
+                                    placeholder="Provide a summary of the legal matter..."
+                                />
+
+                                <button onClick={initateEngagement} className="w-full py-5 bg-amber-600 rounded-2xl font-black text-lg hover:bg-amber-500 transition shadow-xl">
+                                    {loading ? 'Processing...' : ' Initiate Professional Engagement'}
+                                </button>
+                            </form>
+                        </div>}
                 </div>
 
             </div>
