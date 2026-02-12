@@ -4,6 +4,7 @@ import { Footer } from "@/components/footer";
 import { HeroCarousel } from "@/components/hero-carousel"
 import HighlightsSection from "@/components/highlights-section";
 import { Navbar } from "@/components/navbar"
+import PrincipalSection from "@/components/principal-section";
 import ProcessSection from "@/components/process-section";
 import ScrollProgress from "@/components/scroll-progress";
 import TestimonialsAndInsights from "@/components/testimonials-insights";
@@ -21,6 +22,7 @@ export default function Home() {
       <HeroCarousel />
       <HighlightsSection />
       <ProcessSection />
+      <PrincipalSection />
       <ClinicSection />
       <TestimonialsAndInsights />
       <ContactSection />

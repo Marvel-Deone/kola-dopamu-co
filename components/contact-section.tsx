@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const contactItems = [
     {
@@ -66,34 +66,28 @@ export default function ContactSection() {
     const [loading, setLoading] = useState<boolean>(false);
     const [showSuccess, setShowSuccess] = useState<boolean>(false);
 
-    // const initateEngagement = () => {
-    //     setLoading(true);
-    //     setTimeout(() => {
-    //         setShowSuccess(true);
-    //         setLoading(false);
+    useEffect(() => {
+        if (!showSuccess) return;
 
-    //         setTimeout(() => {
-    //             setShowSuccess(false);
-    //         }, 3000);
+        const timer = setTimeout(() => {
+            setShowSuccess(false);
+        }, 3000);
 
-    //     }, 2000);
-    // }
+        return () => clearTimeout(timer);
+    }, [showSuccess]);
+
 
     const initiateEngagement = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault(); // prevent page refresh
+        e.preventDefault();
 
         setLoading(true);
 
         setTimeout(() => {
-            setShowSuccess(true);
             setLoading(false);
-
-            setTimeout(() => {
-                setShowSuccess(false);
-            }, 3000);
-
-        }, 2000);
+            setShowSuccess(true);
+        }, 3000);
     };
+
 
     return (
         <section id="consultation" className="py-24 bg-white relative">
@@ -150,8 +144,36 @@ export default function ContactSection() {
                                     placeholder="Provide a summary of the legal matter..."
                                 />
 
-                                <button type="submit" disabled={loading}className="w-full py-5 bg-amber-600 rounded-2xl font-black text-lg hover:bg-amber-500 transition shadow-xl">
-                                    {loading ? 'Processing...' : ' Initiate Professional Engagement'}
+                                <button type="submit" disabled={loading} className="w-full py-5 bg-amber-600 rounded-2xl font-black text-lg hover:bg-amber-500 transition shadow-xl">
+                                    {loading ?
+                                        (
+                                            <div className="flex gap-2 items-center justify-center">
+                                                {/* Spinner */}
+                                                <svg
+                                                    className="w-5 h-5 animate-spin text-white"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <circle
+                                                        className="opacity-25"
+                                                        cx="12"
+                                                        cy="12"
+                                                        r="10"
+                                                        stroke="currentColor"
+                                                        strokeWidth="4"
+                                                    />
+                                                    <path
+                                                        className="opacity-75"
+                                                        fill="currentColor"
+                                                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                                    />
+                                                </svg>
+
+                                                <span>Processing...</span>
+                                            </div>
+                                        ) : <span>Initiate Professional Engagement</span>
+                                    }
                                 </button>
                             </form>
                         </div>}

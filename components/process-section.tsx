@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ProcessSection() {
   return (
     <section id="practice" className="py-24 bg-white overflow-hidden">
